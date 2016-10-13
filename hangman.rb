@@ -26,7 +26,8 @@ def display (chars,guesses)
   return masked_word
 end
 
-def reply_test (play)
+def reply_test
+  play = gets.chomp
   until play == "y" || play == "n"
     puts "You didn't say y or n. Try again."
     play = gets.chomp
@@ -49,8 +50,7 @@ while play_again == "y"
     user_guess = gets.chomp
     if user_guess.split("") == hangman_word
       puts "You won! Good job. Would you like to play again?"
-      play_again = gets.chomp
-      play_again = reply_test(play_again)
+      play_again = reply_test
       chances = 0
     else
       if user_guesses.include?(user_guess)
@@ -73,13 +73,11 @@ while play_again == "y"
         end
           if word.include?("_") && chances == 0
           puts "You failed! The word was #{hangman_word.join("")}. Would you like to play again? y/n"
-          play_again = gets.chomp
-          play_again = reply_test(play_again)
+          play_again = reply_test
         elsif !(word.include?("_"))
           puts "You win! Would you like to play again? y/n"
+          play_again = reply_test
           chances = 0
-          play_again = gets.chomp
-          play_again = reply_test(play_again)
         else
           puts "You have #{chances} remaining chances"
         end
