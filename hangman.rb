@@ -72,15 +72,15 @@ while play_again == "y"
           puts "Not a letter, try again"
         end
           if word.include?("_") && chances == 0
-          puts "You failed! The word was #{hangman_word.join("")}. Would you like to play again? y/n"
-          play_again = reply_test
-        elsif !(word.include?("_"))
-          puts "You win! Would you like to play again? y/n"
-          play_again = reply_test
-          chances = 0
-        else
-          puts "You have #{chances} remaining chances"
-        end
+            puts "You failed! The word was #{hangman_word.join("")}. Would you like to play again? y/n"
+            play_again = reply_test
+          elsif !(word.include?("_"))
+            puts "You win! Would you like to play again? y/n"
+            play_again = reply_test
+            chances = 0
+          else
+            puts "You have #{chances} remaining chances"
+          end
       end
     end
   end
