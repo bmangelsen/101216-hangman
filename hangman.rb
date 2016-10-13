@@ -45,37 +45,44 @@ while play_again == "y"
   user_guesses = []
   chances = 8
   while chances >= 1
-    puts "Guess a letter!"
+    puts "Guess a letter or try to guess the word!"
     user_guess = gets.chomp
-    if user_guesses.include?(user_guess)
-      puts "You already guessed that letter, try again"
-      user_word_display(user_guesses)
+    if user_guess.split("") == hangman_word
+      puts "You won! Good job. Would you like to play again?"
+      play_again = gets.chomp
+      play_again = reply_test(play_again)
+      chances = 0
     else
-      if letter_test(user_guess) && word_test(hangman_word,user_guess)
-        user_guesses << user_guess
-        word = display(hangman_word,user_guesses)
+      if user_guesses.include?(user_guess)
+        puts "You already guessed that letter, try again"
         user_word_display(user_guesses)
-        chances -=1
-      elsif letter_test(user_guess) && !word_test(hangman_word,user_guess)
-        user_guesses << user_guess
-        puts "Not in the word, try again"
-        word = display(hangman_word,user_guesses)
-        user_word_display(user_guesses)
-        chances -=1
       else
-        puts "Not a letter, try again"
-      end
-        if word.include?("_") && chances == 0
-        puts "You failed! The word was #{hangman_word.join("")}. Would you like to play again? y/n"
-        play_again = gets.chomp
-        play_again = reply_test(play_again)
-      elsif !(word.include?("_"))
-        puts "You win! Would you like to play again? y/n"
-        chances = 0
-        play_again = gets.chomp
-        play_again = reply_test(play_again)
-      else
-        puts "You have #{chances} remaining chances"
+        if letter_test(user_guess) && word_test(hangman_word,user_guess)
+          user_guesses << user_guess
+          word = display(hangman_word,user_guesses)
+          user_word_display(user_guesses)
+          chances -=1
+        elsif letter_test(user_guess) && !word_test(hangman_word,user_guess)
+          user_guesses << user_guess
+          puts "Not in the word, try again"
+          word = display(hangman_word,user_guesses)
+          user_word_display(user_guesses)
+          chances -=1
+        else
+          puts "Not a letter, try again"
+        end
+          if word.include?("_") && chances == 0
+          puts "You failed! The word was #{hangman_word.join("")}. Would you like to play again? y/n"
+          play_again = gets.chomp
+          play_again = reply_test(play_again)
+        elsif !(word.include?("_"))
+          puts "You win! Would you like to play again? y/n"
+          chances = 0
+          play_again = gets.chomp
+          play_again = reply_test(play_again)
+        else
+          puts "You have #{chances} remaining chances"
+        end
       end
     end
   end
