@@ -5,15 +5,15 @@ puts "Welcome to hangman! You get 8 chances to guess the word."
 play_again = "y"
 
 
-def word_test (word,letter)
+def word_test(word, letter)
   word.include?(letter)
 end
 
-def letter_test (letter)
+def letter_test(letter)
   ("a".."z").include?(letter.downcase)
 end
 
-def display (chars,guesses)
+def display(chars, guesses)
   masked_word = ""
   chars.each do |x|
     if guesses.include?(x)
